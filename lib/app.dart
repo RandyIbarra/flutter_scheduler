@@ -2,26 +2,25 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_scheduler/screens/mainscreen.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({
+class SchedulerApp extends StatefulWidget {
+  const SchedulerApp({
     Key? key,
-    required this.college
+    required this.college,
   }) : super(key: key);
 
   final Map college;
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}  
+  State<SchedulerApp> createState() => _SchedulerAppState();
+}
 
-class _MyAppState extends State<MyApp> {
-
+class _SchedulerAppState extends State<SchedulerApp> {
   late Map college;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    this.college = widget.college;
+    college = widget.college;
   }
 
   @override

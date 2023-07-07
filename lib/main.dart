@@ -47,5 +47,5 @@ void main() {
     "info": info
   };
 
-  runApp(MyApp(college: college));
+  runApp(SchedulerApp(college: college));
 }
