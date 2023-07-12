@@ -1,7 +1,7 @@
 // flutter
 import 'package:flutter/material.dart';
 // this project
-import 'package:flutter_scheduler/screens/mainscreen.dart';
+import 'package:flutter_scheduler/login/screen.dart';
 
 /// Main [Widget] for this app.
 class SchedulerApp extends StatefulWidget {
@@ -65,11 +65,18 @@ class _SchedulerAppState extends State<SchedulerApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'SchedulerApp',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainScreen(college: college),
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Scheduler'),
+        ),
+        body: const LoginWidget(),
+      ),
     );
   }
 }
