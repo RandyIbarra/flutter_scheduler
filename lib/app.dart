@@ -1,10 +1,11 @@
+// flutter
 import 'package:flutter/material.dart';
-
+// this project
 import 'package:flutter_scheduler/screens/mainscreen.dart';
 
+/// Main [Widget] for this app.
 class SchedulerApp extends StatefulWidget {
-  const SchedulerApp({Key? key}) : super(key: key);
-
+  const SchedulerApp({super.key});
   @override
   State<SchedulerApp> createState() => _SchedulerAppState();
 }
