@@ -77,7 +77,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 child: Theme(
                   data: Theme.of(context),
                   child: CustomAsyncButton(
-                    disabledUpload: disabledUpload,
+                    disabledUpload: false, //disabledUpload,
                     buttonText: 'Login',
                     onPressed: () async => creds =
                         await FirebaseAuth.instance.signInWithEmailAndPassword(

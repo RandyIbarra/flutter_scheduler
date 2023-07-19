@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_scheduler/activities/listing_screen.dart';
+import 'package:flutter_scheduler/classroom/listing_screen.dart';
 
 /// Home screen with main menu.
 class HomeScreen extends StatefulWidget {
@@ -46,15 +48,29 @@ class _HomeScreenState extends State<HomeScreen> {
           Card(
             elevation: 20,
             child: ListTile(
-              title: const Text('Classroom'),
+              title: const Text('Classrooms'),
               subtitle: const Text('See, create, edit and delete classrooms'),
               trailing: const Icon(Icons.class_sharp),
-              onTap: () {},
-              /*
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ,)
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ClassroomListingScreen(),
+                ),
               ),
-              */
+            ),
+          ),
+          Card(
+            elevation: 20,
+            child: ListTile(
+              title: const Text('Activities'),
+              subtitle: const Text(
+                'See, create, edit and delete schoolar activities',
+              ),
+              trailing: const Icon(Icons.class_sharp),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ActivityListingScreen(),
+                ),
+              ),
             ),
           ),
         ],
