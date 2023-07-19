@@ -7,100 +7,57 @@ import 'package:flutter_widgets/flutter_widgets.dart';
 // this project
 import 'package:flutter_scheduler/home/screen.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key}) : super(key: key);
+/// Login screen
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController textControllerPassword = TextEditingController();
-  TextEditingController textControllerEmail = TextEditingController();
-
-  bool showPassword = false;
-  bool disabledUpload = true;
-
+class _LoginScreenState extends State<LoginScreen> {
+  // firebase credentials, obtained after submit valid email and password
   UserCredential? creds;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: MediaQuery.of(context).size.height / 5,
-        horizontal: 8.0,
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Scheduler'),
       ),
-      child: Center(
-        child: SizedBox(
-          width: 400,
-          height: 200,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              TextField(
-                controller: textControllerEmail,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Email',
-                ),
-                onChanged: (value) => setState(() {
-                  disabledUpload = textControllerPassword.text == '' ||
-                      textControllerEmail.text == '';
-                }),
-              ),
-              TextField(
-                controller: textControllerPassword,
-                obscureText: !showPassword,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: 'Password',
-                  suffixIcon: IconButton(
-                    icon: Tooltip(
-                      message: showPassword ? 'Show' : 'Hide',
-                      child: showPassword
-                          ? const Icon(Icons.visibility_off)
-                          : const Icon(Icons.visibility),
-                    ),
-                    onPressed: () => setState(() {
-                      showPassword = !showPassword;
-                    }),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height / 5,
+          horizontal: 8.0,
+        ),
+        child: Center(
+          child: FractionallySizedBox(
+            widthFactor: .5,
+            heightFactor: .8,
+            // from own library
+            child: LoginWidget(
+              onLogin: (email, password) => FirebaseAuth.instance
+                  .signInWithEmailAndPassword(email: email, password: password)
+                  .then(
+                    (value) => creds = value,
                   ),
-                ),
-                onChanged: (value) => setState(() {
-                  disabledUpload = textControllerPassword.text == '' ||
-                      textControllerEmail.text == '';
-                }),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 50,
-                width: 250,
-                child: Theme(
-                  data: Theme.of(context),
-                  child: CustomAsyncButton(
-                    disabledUpload: false, //disabledUpload,
-                    buttonText: 'Login',
-                    onPressed: () async => creds =
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: textControllerEmail.text,
-                      password: textControllerPassword.text,
+              onSuccess: () {
+                if (creds == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Error in credentials. Please, try again.'),
                     ),
-                    onSuccess: () {
-                      if (creds!.user != null) {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
-                          ),
-                        );
-                      }
-                      setState(() {
-                        textControllerPassword.text = '';
-                        textControllerEmail.text = '';
-                      });
-                    },
-                  ),
-                ),
-              ),
-            ],
+                  );
+                } else if (creds!.user != null) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const HomeScreen(),
+                    ),
+                  );
+                }
+              },
+            ),
           ),
         ),
       ),

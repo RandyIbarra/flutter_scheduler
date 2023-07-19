@@ -14,13 +14,7 @@ class SchedulerApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Scheduler'),
-        ),
-        body: const LoginWidget(),
-      ),
+      home: const LoginScreen(),
     );
   }
 }
