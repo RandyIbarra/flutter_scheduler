@@ -9,7 +9,6 @@ import 'package:flutter_scheduler/courses/course_editor.dart';
 
 class CourseListingScreen extends StatelessWidget {
   const CourseListingScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
