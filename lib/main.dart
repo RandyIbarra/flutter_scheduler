@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_scheduler/app.dart';
 
-/// Main function: Runs Scheduler App
+/// Main function: Initialize firebase app and run SchedulerApp.
 void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
