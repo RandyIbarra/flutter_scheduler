@@ -1,13 +1,10 @@
 // flutter
 import 'package:flutter/material.dart';
-import 'package:flutter_scheduler/courses/listing_screen.dart';
 import 'package:flutter_scheduler/login/screen.dart';
 // external packages
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // this project
-//import 'package:flutter_scheduler/classroom/listing_screen.dart';
-import 'package:flutter_scheduler/activities/listing_screen.dart';
 
 class SchedulerDrawer extends StatelessWidget {
   const SchedulerDrawer({super.key});
