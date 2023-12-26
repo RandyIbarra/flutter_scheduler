@@ -1,7 +1,8 @@
 // flutter
 import 'package:flutter/material.dart';
 // this project
-import 'package:flutter_scheduler/login/screen.dart';
+import 'package:flutter_scheduler/theme.dart';
+import 'package:flutter_scheduler/landing.dart';
 
 /// Main [Widget] for this app.
 class SchedulerApp extends StatelessWidget {
@@ -9,12 +10,12 @@ class SchedulerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'SchedulerApp',
+      // app settings
+      theme: appTheme,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const LoginScreen(),
+      // main elements
+      title: 'SchedulerApp',
+      home: const Landing(),
     );
   }
 }

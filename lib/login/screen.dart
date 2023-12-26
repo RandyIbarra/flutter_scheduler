@@ -1,4 +1,6 @@
 // flutter
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 // external packages
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +26,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Scheduler'),
+        title: const Text('DEMAT Scheduler'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
@@ -32,16 +35,13 @@ class _LoginScreenState extends State<LoginScreen> {
           horizontal: 8.0,
         ),
         child: Center(
-          child: FractionallySizedBox(
-            widthFactor: .5,
-            heightFactor: .8,
-            // from own library
-            child: LoginWidget(
+          child: Container(
+            width: min(400, MediaQuery.of(context).size.width),
+            alignment: Alignment.center,
+            child: LoginForm(
               onLogin: (email, password) => FirebaseAuth.instance
                   .signInWithEmailAndPassword(email: email, password: password)
-                  .then(
-                    (value) => creds = value,
-                  ),
+                  .then((value) => creds = value),
               onSuccess: () {
                 if (creds == null) {
                   ScaffoldMessenger.of(context).showSnackBar(
