@@ -1,3 +1,5 @@
+import 'package:flutter_scheduler/models/activity.dart';
+/*
 final Set<ActivitySchedule> activityScheduleSet = <ActivitySchedule>{
   // '08:00-09:20'
   ActivitySchedule(
@@ -155,6 +157,7 @@ final Set<ActivitySchedule> activityScheduleSet = <ActivitySchedule>{
     activitySchedule: '15:00-16:20',
   ),
 };
+*/
 
 class Classroom {
   /// Classroom name
@@ -176,14 +179,21 @@ class Classroom {
         ],
       };
 
-  Classroom.fromMap(Map<String, dynamic> map)
-      : id = map['id'] as String,
-        activityScheduleSet =
-            List<Map<String, dynamic>>.from(map['activityScheduleSet'])
-                .map(
-                  (e) => ActivitySchedule.fromMap(e),
-                )
-                .toSet();
+  factory Classroom.fromMap(Map<String, dynamic> map) {
+    print('Building classroom: ${map['id']}');
+    if (!map.containsKey('id')) {
+      throw 'Missing "id" key on Classroom';
+    }
+    return Classroom(
+      id: map['id'] as String,
+      activityScheduleSet:
+          List<Map<String, dynamic>>.from(map['activityScheduleSet'])
+              .map(
+                (e) => ActivitySchedule.fromMap(e),
+              )
+              .toSet(),
+    );
+  }
 
   List<ActivitySchedule> getActivityScheduleListFromDay(String day) {
     final scheduleList = List<ActivitySchedule>.empty(growable: true);
@@ -246,13 +256,29 @@ class ActivitySchedule {
     required this.activitySchedule,
   });
 
-  ActivitySchedule.fromMap(Map<String, dynamic> map)
-      : activity = map['activity'] != null
-            ? Activity.fromMap(Map<String, dynamic>.from(map['activity']))
-            : null,
-        classroomId = map['classroomId'] as String,
-        activityDay = map['activityDay'] as String,
-        activitySchedule = map['activitySchedule'] as String;
+  factory ActivitySchedule.fromMap(Map<String, dynamic> map) {
+    print('Building activity schedule for ${map['activityDay']}');
+    // keys check
+    if (!map.containsKey('classroomId')) {
+      throw 'Missing "classroomId" key on ActivitySchedule';
+    }
+    if (!map.containsKey('activityDay')) {
+      throw 'Missing "activityDay" key on ActivitySchedule';
+    }
+    if (!map.containsKey('activitySchedule')) {
+      throw 'Missing "activitySchedule" key on ActivitySchedule';
+    }
+    return ActivitySchedule(
+      classroomId: map['classroomId'] as String,
+      activityDay: map['activityDay'] as String,
+      activitySchedule: map['activitySchedule'] as String,
+      activity: map['activity'] != null
+          ? Activity.fromMap(
+              Map<String, dynamic>.from(map['activity']),
+            )
+          : null,
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         'classroomId': classroomId,
@@ -260,35 +286,4 @@ class ActivitySchedule {
         'activitySchedule': activitySchedule,
         if (activity != null) 'activity': activity!.toMap(),
       };
-}
-
-/// Activity class
-class Activity {
-  /// Activity id
-  String id;
-
-  /// Activity name
-  String name;
-
-  /// Person in charge
-  String personInCharge;
-
-  Activity({
-    this.id = 'id',
-    this.name = 'Not Assigned yet',
-    this.personInCharge = 'person',
-  });
-
-  Activity.fromMap(Map<String, dynamic> map)
-      : id = map['id'] as String,
-        name = map['name'] as String,
-        personInCharge = map['personInCharge'] as String;
-
-  Map<String, dynamic>? toMap() => name != 'Not Assigned yet'
-      ? {
-          'id': id,
-          'name': name,
-          'personInCharge': personInCharge,
-        }
-      : null;
 }

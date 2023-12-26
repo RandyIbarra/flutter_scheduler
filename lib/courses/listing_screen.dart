@@ -13,7 +13,8 @@ class CourseListingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Courses')),
+        centerTitle: true,
+        title: const Text('Courses'),
       ),
       body: Center(
         child: DocumentStreamBuilder<List<Course>>(

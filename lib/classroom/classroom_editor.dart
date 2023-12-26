@@ -1,6 +1,7 @@
 // flutter
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_scheduler/models/activity.dart';
 // this project
 import 'package:flutter_scheduler/models/classroom.dart';
 import 'package:flutter_scheduler/buttons/classroomschedulebutton.dart';
@@ -25,9 +26,6 @@ class _ClassroomEditorState extends State<ClassroomEditor> {
 
   @override
   Widget build(BuildContext context) {
-    print('Classroom editor');
-    print(widget.classroom.toMap());
-    print('');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

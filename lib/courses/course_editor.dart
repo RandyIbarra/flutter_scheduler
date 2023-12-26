@@ -100,7 +100,8 @@ class _CourseEditorState extends State<CourseEditor> {
                           ),
                         );
                         return Future.error(
-                            Exception('Invalid email or password'));
+                          Exception('Invalid id or name'),
+                        );
                       }
                     },
                     onSuccess: () {

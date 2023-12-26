@@ -1,11 +1,12 @@
 // flutter
 import 'package:flutter/material.dart';
+import 'package:flutter_scheduler/courses/listing_screen.dart';
 import 'package:flutter_scheduler/login/screen.dart';
 // external packages
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // this project
-import 'package:flutter_scheduler/classroom/listing_screen.dart';
+//import 'package:flutter_scheduler/classroom/listing_screen.dart';
 import 'package:flutter_scheduler/activities/listing_screen.dart';
 
 /// Home screen with main menu.
@@ -55,20 +56,33 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         children: [
           Card(
-            elevation: 20,
+            elevation: 5.0,
             child: ListTile(
-              title: const Text('Classrooms'),
-              subtitle: const Text('See, create, edit and delete classrooms'),
-              trailing: const Icon(Icons.class_sharp),
+              title: const Text('Courses'),
+              subtitle: const Text('See, create, edit and delete UG courses'),
+              trailing: const Icon(Icons.golf_course),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const ClassroomListingScreen(),
+                  builder: (context) => const CourseListingScreen(),
                 ),
               ),
             ),
           ),
+          //Card(
+          //  elevation: 5.0,
+          //  child: ListTile(
+          //    title: const Text('Classrooms'),
+          //    subtitle: const Text('See, create, edit and delete classrooms'),
+          //    trailing: const Icon(Icons.class_sharp),
+          //    onTap: () => Navigator.of(context).push(
+          //      MaterialPageRoute(
+          //        builder: (context) => const ClassroomListingScreen(),
+          //      ),
+          //    ),
+          //  ),
+          //),
           Card(
-            elevation: 20,
+            elevation: 5.0,
             child: ListTile(
               title: const Text('Activities'),
               subtitle: const Text(
